@@ -1,9 +1,9 @@
 # SnippetPrintScript
 
-Servicio de PrintScript de [Snippet Searcher](https://github.com/MartinaCousido/SnippetSearcher). Implementa la interfaz `Language` por HTTP: recibe código PrintScript y lo valida (después también lo va a lintear, formatear y ejecutar).
+Servicio de PrintScript de [Snippet Searcher](https://github.com/ingdesis/SnippetSearcher). Implementa la interfaz `Language` por HTTP: recibe código PrintScript y lo valida (después también lo va a lintear, formatear y ejecutar).
 
 > La arquitectura, las user stories (US) y las decisiones técnicas del sistema completo están en el repo
-> [SnippetSearcher](https://github.com/MartinaCousido/SnippetSearcher), que es la fuente de verdad.
+> [SnippetSearcher](https://github.com/ingdesis/SnippetSearcher), que es la fuente de verdad.
 > Este README cubre solo lo específico de este servicio.
 
 ## Responsabilidad
@@ -16,7 +16,7 @@ Servicio de PrintScript de [Snippet Searcher](https://github.com/MartinaCousido/
 
 ## La librería
 
-Este repo **no tiene el código del lenguaje**. Usa la librería [PrintScript](https://github.com/MartinaCousido/PrintScript), publicada en GitHub Packages:
+Este repo **no tiene el código del lenguaje**. Usa la librería [PrintScript](https://github.com/ingdesis/PrintScript), publicada en GitHub Packages:
 
 ```groovy
 implementation 'org.printscript:runner:0.3.2'
@@ -36,7 +36,7 @@ En Docker el token llega como *secret de build*: existe solo mientras se compila
 
 ## Operaciones
 
-Contrato definido en [Decisiones técnicas](https://github.com/MartinaCousido/SnippetSearcher#decisiones-técnicas) de SnippetSearcher.
+Contrato definido en [Decisiones técnicas](https://github.com/ingdesis/SnippetSearcher#decisiones-técnicas) de SnippetSearcher.
 
 | Operación | Endpoint | Respuesta | User story |
 |---|---|---|---|
@@ -82,7 +82,7 @@ Versiones soportadas: `1.0` y `1.1`.
 
 ## Observabilidad (New Relic)
 
-El agente Java de New Relic (`9.5.0`) va en la imagen, igual que en Snippet Service: manda métricas, traces y los logs del servicio. Cada pedido lleva en el contexto de los logs (MDC) el `requestId` que manda Snippet Service (`X-Request-Id`) y el servicio. Cada operación (validar, lintear, formatear y ejecutar) queda en el log con la versión, el resultado y cuánto tardó; nunca el código del snippet. Ver **Observabilidad (New Relic)** en [Decisiones técnicas](https://github.com/MartinaCousido/SnippetSearcher#decisiones-técnicas).
+El agente Java de New Relic (`9.5.0`) va en la imagen, igual que en Snippet Service: manda métricas, traces y los logs del servicio. Cada pedido lleva en el contexto de los logs (MDC) el `requestId` que manda Snippet Service (`X-Request-Id`) y el servicio. Cada operación (validar, lintear, formatear y ejecutar) queda en el log con la versión, el resultado y cuánto tardó; nunca el código del snippet. Ver **Observabilidad (New Relic)** en [Decisiones técnicas](https://github.com/ingdesis/SnippetSearcher#decisiones-técnicas).
 
 En local el agente viene apagado. Para mandar datos, se levanta con `NEW_RELIC_AGENT_ENABLED=true` y `NEW_RELIC_LICENSE_KEY` (la de `SnippetSearcher-infra/newrelic/.env`), y aparece como `printscript-service (local)`.
 
@@ -92,7 +92,7 @@ En local el agente viene apagado. Para mandar datos, se levanta con `NEW_RELIC_A
 
 ## Imagen Docker
 
-En cada push a `dev` o `main`, GitHub Actions (`.github/workflows/cd.yml`) arma la imagen y la publica en GHCR como `ghcr.io/martinacousido/printscript-service`, con el tag del ambiente (`dev` o `prod`) y el del commit (`sha-…`). Ver [Tags de las imágenes](https://github.com/MartinaCousido/SnippetSearcher-infra#tags-de-las-imágenes) en el repo de infra.
+En cada push a `dev` o `main`, GitHub Actions (`.github/workflows/cd.yml`) arma la imagen y la publica en GHCR como `ghcr.io/ingdesis/printscript-service`, con el tag del ambiente (`dev` o `prod`) y el del commit (`sha-…`). Ver [Tags de las imágenes](https://github.com/ingdesis/SnippetSearcher-infra#tags-de-las-imágenes) en el repo de infra.
 
 Después, el mismo workflow entra por SSH a la VM del ambiente y corre `docker service update` con el tag `sha-…`. Actualiza **solo** `printscript-service`. Usa los secrets `VM_HOST`, `VM_USER` y `VM_SSH_KEY` de los *Environments* `dev` y `prod`. La VM tiene que estar prendida, y el servicio tiene que estar en el `docker-stack.yml` de infra.
 
@@ -130,7 +130,7 @@ En cada PR hacia `dev` o `main`, el CI (`.github/workflows/ci.yml`) corre `./gra
 
 ### Linter y cobertura
 
-`./gradlew build` también corre el linter y mide la cobertura. Si algo falla, el build falla, y con él el CI. Ver **Linter y cobertura** en [Decisiones técnicas](https://github.com/MartinaCousido/SnippetSearcher#decisiones-técnicas) de SnippetSearcher.
+`./gradlew build` también corre el linter y mide la cobertura. Si algo falla, el build falla, y con él el CI. Ver **Linter y cobertura** en [Decisiones técnicas](https://github.com/ingdesis/SnippetSearcher#decisiones-técnicas) de SnippetSearcher.
 
 | Herramienta | Qué revisa | Configuración |
 |---|---|---|

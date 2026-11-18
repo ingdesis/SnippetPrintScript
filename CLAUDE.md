@@ -6,7 +6,7 @@ Este servicio es parte de Snippet Searcher. Las reglas, la arquitectura y las de
 
 - Leer este `README.md` y, del repo SnippetSearcher: `CLAUDE.md`, `README.md` (en especial **Decisiones técnicas**, **Arquitectura** y **Flujo de trabajo**), `docs/` y `docs/diagramas/`.
   - Si SnippetSearcher está clonado al lado (`../SnippetSearcher`), leerlo desde ahí.
-  - Si no, leerlo desde GitHub: `gh repo view MartinaCousido/SnippetSearcher` y `gh api repos/MartinaCousido/SnippetSearcher/contents/<ruta>`.
+  - Si no, leerlo desde GitHub: `gh repo view ingdesis/SnippetSearcher` y `gh api repos/ingdesis/SnippetSearcher/contents/<ruta>`.
 - Para escribir código, seguir el proceso de la skill `desarrollar-snippetsearcher` de SnippetSearcher (`.claude/skills/desarrollar-snippetsearcher/SKILL.md`).
 - Seguir lo definido en esos archivos. Si algo que la tarea necesita no está definido, o figura como **Pendiente** o **A confirmar**, preguntar a Martina antes de decidir. No inventar stack, versiones, endpoints, contratos entre servicios ni reglas de negocio.
 - Un cambio de contrato de este servicio afecta a Snippet Service: se acuerda y se registra en SnippetSearcher antes de implementarlo.

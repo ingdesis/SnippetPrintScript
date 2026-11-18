@@ -23,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  IMAGE: ghcr.io/martinacousido/printscript-service
+  IMAGE: ghcr.io/ingdesis/printscript-service
 
 jobs:
   publicar-imagen:
