@@ -24,7 +24,7 @@ repositories {
 	// En local se toma de ~/.gradle/gradle.properties (gpr.user y gpr.key);
 	// en el CI y en Docker, de la variable PACKAGES_TOKEN. Nunca se commitea.
 	maven {
-		url = 'https://maven.pkg.github.com/MartinaCousido/PrintScript'
+		url = 'https://maven.pkg.github.com/ingdesis/PrintScript'
 		credentials {
 			username = providers.gradleProperty('gpr.user')
 					.orElse(providers.environmentVariable('PACKAGES_USER'))
